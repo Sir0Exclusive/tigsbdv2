@@ -43,7 +43,7 @@ export async function getSession() {
 
 export async function getCurrentUser(): Promise<PublicUser | null> {
 	const databaseUrl = process.env.DATABASE_URL;
-	if (!databaseUrl || databaseUrl.startsWith("file:")) return null;
+	if (process.env.VERCEL === "1" || !databaseUrl || databaseUrl.startsWith("file:")) return null;
 	try {
 		const session = await getSession();
 		if (!session) return null;

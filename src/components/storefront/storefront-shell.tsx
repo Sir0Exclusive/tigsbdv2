@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { MobileMenu } from "@/components/storefront/mobile-menu";
 import { StoreSwitcher } from "@/components/storefront/store-switcher";
-import { getCurrentUser } from "@/lib/auth/session";
 import type { PublicUser } from "@/lib/auth/service";
 import { storeConfigs, type StoreConfig } from "@/lib/stores";
 
@@ -12,7 +11,11 @@ type StorefrontShellProps = {
 };
 
 export async function StorefrontShell({ store, children }: StorefrontShellProps) {
-  const currentUser: PublicUser | null = await getCurrentUser();
+  let currentUser: PublicUser | null = null;
+  if (process.env.DATABASE_URL && !process.env.DATABASE_URL.startsWith("file:") && process.env.VERCEL !== "1") {
+    const { getCurrentUser } = await import("@/lib/auth/session");
+    currentUser = await getCurrentUser();
+  }
   return (
     <div className="min-h-screen bg-[#f7f8f6] text-slate-950" style={{ "--store-accent": store.colors.accent } as React.CSSProperties}>
       <div className="bg-slate-950 px-6 py-2 text-center text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-amber-200">

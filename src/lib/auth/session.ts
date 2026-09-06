@@ -42,7 +42,7 @@ export async function getSession() {
 }
 
 export async function getCurrentUser(): Promise<PublicUser | null> {
-	if (process.env.NODE_ENV === "production" && env.DATABASE_URL.startsWith("file:")) return null;
+	if (env.DATABASE_URL.startsWith("file:")) return null;
 	try {
 		const session = await getSession();
 		if (!session) return null;

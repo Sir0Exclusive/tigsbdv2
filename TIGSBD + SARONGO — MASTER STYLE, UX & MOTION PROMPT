@@ -1,0 +1,1667 @@
+# TIGSBD + SARONGO — MASTER STYLE, UX & MOTION PROMPT
+
+## Purpose
+
+This document is the visual and interaction-direction layer for the new TIGSBD/Sarongo e-commerce platform.
+
+Use this file together with:
+
+1. `TIGSBD_NEW_PLATFORM_MASTER_SPEC.md` — product/system architecture and requirements.
+2. `TIGSBD_COPILOT_MASTER_BUILD_PROMPT.md` — implementation sequence and engineering rules.
+
+This document answers a different question:
+
+> What should the finished platform feel, look, move, and behave like?
+
+The target is:
+
+- Amazon-level e-commerce usability and functionality
+- Awwwards-level visual quality, storytelling, polish, and motion
+- A completely original TIGSBD/Sarongo identity
+
+Do NOT copy Amazon's branding, exact layouts, proprietary visual language, or any particular Awwwards website. Use them only as high-level references for usability and creative quality.
+
+---
+
+# 1. CORE DESIGN PHILOSOPHY
+
+## 1.1 The product must be easy before it is impressive
+
+The platform is an e-commerce product first.
+
+Users must immediately understand:
+
+- what is being sold
+- where they are
+- what store they are browsing
+- how to search
+- how to filter
+- how much something costs
+- whether it is available
+- how to add it to cart
+- how to checkout
+- where their order is
+
+Creative design must NEVER obscure these fundamentals.
+
+The experience should feel:
+
+> "This looks premium and unusual, but I instantly know how to shop."
+
+---
+
+## 1.2 Amazon-like functionality, not Amazon-like appearance
+
+Borrow the strongest general e-commerce UX principles:
+
+- persistent search
+- strong product discovery
+- clear categories
+- useful filtering
+- sorting
+- predictable product cards
+- obvious pricing
+- stock visibility
+- fast add-to-cart
+- persistent cart access
+- clear checkout progress
+- address management
+- payment selection
+- order tracking
+- account history
+- wishlist
+- reviews
+- recommendations
+- responsive customer flows
+- minimal checkout friction
+
+Do NOT create an Amazon clone.
+
+The interface must have its own:
+
+- composition
+- typography
+- spacing rhythm
+- card treatment
+- navigation behavior
+- motion language
+- imagery
+- brand personality
+- store identities
+
+---
+
+# 2. AWWWARDS-INSPIRED CREATIVE DIRECTION
+
+The site should have the craftsmanship associated with high-quality modern award-winning web design:
+
+- strong art direction
+- deliberate typography
+- sophisticated whitespace
+- editorial composition
+- cinematic product imagery
+- subtle depth
+- smooth transitions
+- refined hover states
+- meaningful micro-interactions
+- premium loading states
+- carefully controlled motion
+
+However:
+
+## Never sacrifice conversion for visual experimentation.
+
+Avoid:
+
+- giant animations before content becomes usable
+- confusing navigation
+- unnecessary cursor effects
+- slow intro sequences
+- motion on every element
+- excessive parallax
+- animations that delay checkout
+- decorative effects that hurt readability
+- animations that make the site feel like a portfolio rather than a store
+
+---
+
+# 3. BRAND PERSONALITY
+
+## TIGSBD
+
+TIGSBD should feel:
+
+- premium
+- modern
+- energetic
+- trustworthy
+- technology-forward
+- commercial
+- confident
+- polished
+
+Core visual language:
+
+- near-black / dark slate
+- amber / gold
+- white
+- cool gray
+- subtle gradients
+- controlled contrast
+- clean geometry
+- premium product photography
+
+Reference palette:
+
+- `#0F172A`
+- `#111827`
+- `#FBBF24`
+- `#F59E0B`
+- `#D97706`
+- `#FFFFFF`
+- `#F8FAFC`
+- `#E2E8F0`
+- `#94A3B8`
+
+Use the palette intentionally. Do not force every color into every component.
+
+---
+
+# 4. SARONGO BRAND PERSONALITY
+
+Sarongo is a sibling store, not a second theme skin.
+
+It shares the same platform infrastructure but should have its own personality.
+
+Sarongo should feel:
+
+- fresh
+- expressive
+- lifestyle-oriented
+- elegant
+- contemporary
+- visually distinct
+- approachable
+- premium without feeling corporate
+
+Sarongo must be recognizable immediately.
+
+The design system should share:
+
+- accessibility rules
+- spacing principles
+- component logic
+- interaction quality
+- navigation usability
+- checkout behavior
+- typography discipline
+
+But allow Sarongo to differ through:
+
+- accent treatment
+- imagery
+- editorial composition
+- section styling
+- decorative details
+- motion character
+- campaign presentation
+
+Do NOT make Sarongo look like TIGSBD with a different accent color.
+
+---
+
+# 5. DESIGN SYSTEM
+
+## 5.1 Typography
+
+Use a modern, highly legible sans-serif system.
+
+Recommended hierarchy:
+
+### Brand
+Strong geometric/display treatment.
+
+### H1
+Large, confident, editorial.
+
+### H2
+Strong section heading.
+
+### H3
+Product/category section heading.
+
+### Body
+Highly readable regular weight.
+
+### Supporting text
+Muted but accessible.
+
+### Price
+Highly visible and numerically clear.
+
+### Labels
+Compact uppercase or semibold labels where appropriate.
+
+The existing brand direction of:
+
+- Montserrat 800/900 for major branding
+- Poppins 800/900 for strong labels/headings
+
+may be retained or refined if implementation supports it.
+
+Do not use too many font families.
+
+Maximum:
+
+- 1 primary UI family
+- 1 optional display family
+
+---
+
+# 6. SPACING
+
+Use a consistent spacing scale.
+
+Prefer a generous modern rhythm rather than cramped e-commerce layouts.
+
+Typical principles:
+
+- compact spacing inside controls
+- comfortable spacing inside cards
+- generous spacing between sections
+- large whitespace around major campaign content
+- tighter mobile spacing without becoming cramped
+
+Do not randomly choose pixel values.
+
+Create reusable spacing tokens.
+
+---
+
+# 7. CORNERS, BORDERS & DEPTH
+
+Use rounded corners, but avoid excessive "bubble UI."
+
+Suggested philosophy:
+
+- buttons: medium radius
+- cards: medium/large radius
+- inputs: medium radius
+- major promotional panels: larger radius
+- images: consistent radius system
+
+Borders should be subtle.
+
+Shadows should communicate elevation, not decoration.
+
+Use layered depth sparingly:
+
+- card hover
+- sticky navigation
+- floating cart
+- dropdowns
+- modals
+- product image focus
+- checkout panels
+
+---
+
+# 8. GLOBAL NAVIGATION
+
+The navigation is one of the most important components.
+
+## Desktop
+
+Include:
+
+- brand
+- store switcher
+- category/navigation access
+- large search
+- account
+- wishlist
+- cart
+- relevant utility actions
+
+The search must be prominent.
+
+The navigation should remain recognizable while scrolling.
+
+Use a sticky navigation pattern where appropriate.
+
+### Scroll behavior
+
+At page top:
+
+- more spacious
+- visually integrated with hero
+
+After scrolling:
+
+- slightly more compact
+- stronger background separation
+- subtle shadow/border
+- smooth transition
+
+Do not make the nav jump.
+
+---
+
+# 9. STORE SWITCHER
+
+The user must always understand whether they are browsing:
+
+- TIGSBD
+- Sarongo
+
+Store switching should be extremely easy.
+
+Use a premium animated interaction.
+
+Example:
+
+1. user opens store selector
+2. stores appear as distinct options
+3. active store is clearly marked
+4. switching triggers a short transition
+5. destination loads without unnecessary delay
+
+The animation should communicate a change of environment, not merely move a button.
+
+Do not make switching slow.
+
+---
+
+# 10. SEARCH EXPERIENCE
+
+Search is a primary e-commerce feature.
+
+It should support:
+
+- autocomplete
+- recent searches where appropriate
+- popular suggestions
+- product suggestions
+- category suggestions
+- fuzzy matching
+- useful empty states
+- keyboard navigation
+- mobile-friendly search
+
+Visual behavior:
+
+- focus state should be obvious
+- search overlay/dropdown should feel polished
+- suggestions should animate subtly
+- results should appear quickly
+- no unnecessary cinematic transition
+
+Search must feel faster than it looks.
+
+---
+
+# 11. HOMEPAGE
+
+The homepage should NOT feel like a generic Shopify template.
+
+Use a strong visual hierarchy.
+
+Recommended structure:
+
+1. announcement/promo strip
+2. primary navigation
+3. hero/campaign section
+4. featured categories
+5. best sellers / featured products
+6. editorial or campaign section
+7. personalized/recommended products
+8. trust/service highlights
+9. promotional banner
+10. footer
+
+The exact content can change by store.
+
+---
+
+# 12. HERO DESIGN
+
+Hero sections are a major opportunity for Awwwards-level art direction.
+
+Possible characteristics:
+
+- oversized typography
+- high-quality product imagery
+- layered composition
+- subtle gradients
+- asymmetric layout
+- controlled image cropping
+- floating product details
+- editorial copy
+- interactive product focus
+- subtle parallax
+
+But the hero must still communicate:
+
+- what is being promoted
+- why it matters
+- what the user should do next
+
+Primary CTA must remain obvious.
+
+Avoid:
+
+- text over unreadable images
+- huge video backgrounds that hurt performance
+- autoplay audio
+- overly complex interactive scenes
+- hero animations that delay shopping
+
+---
+
+# 13. PRODUCT CARD SYSTEM
+
+Product cards are core components.
+
+Each card should clearly show:
+
+- image
+- store context where necessary
+- product title
+- price
+- sale/discount
+- rating
+- review count
+- stock/availability when useful
+- wishlist control
+- quick add where appropriate
+
+## Hover behavior
+
+Desktop:
+
+- subtle image transition
+- secondary image reveal when available
+- gentle elevation
+- wishlist/control appearance
+- quick-add interaction
+
+Do not make the card move dramatically.
+
+## Mobile
+
+No hover-dependent functionality.
+
+All important actions must be touch accessible.
+
+---
+
+# 14. PRODUCT IMAGE TREATMENT
+
+Images should feel premium.
+
+Prefer:
+
+- consistent aspect ratios
+- clean backgrounds where appropriate
+- editorial campaign imagery for feature sections
+- sharp product presentation
+- optimized loading
+- responsive image sizes
+
+Use image transitions carefully.
+
+For galleries:
+
+- thumbnail selection should be smooth
+- active image should transition naturally
+- zoom should feel controlled
+- mobile swipe should be intuitive
+
+---
+
+# 15. CATEGORY / COLLECTION PAGES
+
+Category pages should balance discovery and density.
+
+Include:
+
+- breadcrumb
+- category title
+- optional campaign visual
+- result count
+- filter controls
+- sorting
+- product grid
+- pagination or progressive loading
+
+Desktop:
+
+- efficient multi-column grid
+
+Mobile:
+
+- comfortable 2-column grid where appropriate
+- sticky filter/sort controls
+- touch-friendly controls
+
+Avoid huge decorative gaps that force users to scroll unnecessarily.
+
+---
+
+# 16. FILTERING
+
+Filters must feel instant and clear.
+
+Possible filters:
+
+- category
+- price
+- brand
+- rating
+- availability
+- attributes
+- size/color/variant
+- discount
+- store
+
+Use:
+
+- drawers on mobile
+- sidebar or adaptive panel on desktop
+
+Selected filters should be visible.
+
+Provide a clear reset option.
+
+---
+
+# 17. PRODUCT DETAIL PAGE
+
+The product detail page should be conversion-focused but visually premium.
+
+Desktop composition:
+
+- image/gallery area
+- product information
+- price
+- rating
+- variants
+- stock
+- shipping information
+- quantity
+- add-to-cart
+- buy-now where applicable
+- wishlist
+- product details
+- reviews
+- recommendations
+
+Important purchase controls should remain visible.
+
+Use sticky purchase panels only where they improve usability.
+
+---
+
+# 18. PRODUCT DETAIL MOTION
+
+Use subtle motion:
+
+- image gallery transitions
+- thumbnail activation
+- quantity changes
+- variant selection
+- add-to-cart confirmation
+- wishlist animation
+- expandable details
+- review expansion
+
+Add-to-cart should provide immediate feedback.
+
+Possible interaction:
+
+product CTA → short visual confirmation → cart state updates.
+
+Do NOT redirect users unnecessarily.
+
+---
+
+# 19. CART EXPERIENCE
+
+The cart must feel exceptionally clear.
+
+Show:
+
+- product
+- store
+- variant
+- quantity
+- price
+- subtotal
+- discount
+- shipping estimate
+- total
+
+Because TIGSBD and Sarongo share one cart, the cart must visually distinguish store ownership.
+
+Example:
+
+### TIGSBD
+
+items
+
+### SARONGO
+
+items
+
+Then:
+
+**Combined checkout**
+
+The grouping must not imply separate carts.
+
+---
+
+# 20. CART MICRO-INTERACTIONS
+
+When adding a product:
+
+- CTA feedback
+- cart count updates smoothly
+- optional mini-cart confirmation
+- product thumbnail may briefly appear in cart indicator
+- no disruptive redirect
+
+When changing quantity:
+
+- price updates smoothly
+- total updates immediately
+- loading states are localized
+
+When removing:
+
+- use a subtle collapse/transition
+- provide undo where appropriate
+
+---
+
+# 21. CHECKOUT
+
+Checkout should be the least experimental part of the design.
+
+Prioritize:
+
+- speed
+- trust
+- clarity
+- accessibility
+- error prevention
+
+Visual hierarchy:
+
+1. order summary
+2. shipping/address
+3. payment
+4. confirmation
+
+Use clear progress indicators if the flow has multiple steps.
+
+Do not introduce decorative animation that delays completion.
+
+---
+
+# 22. ORDER CONFIRMATION
+
+The confirmation page should feel satisfying.
+
+Show:
+
+- success state
+- order number
+- purchased items
+- store grouping
+- total
+- delivery information
+- tracking access
+- account/order history access
+
+For mixed-store orders, clearly show which items belong to which store.
+
+---
+
+# 23. CUSTOMER ACCOUNT
+
+The account area should be functional and clean.
+
+Sections:
+
+- overview
+- orders
+- order details
+- addresses
+- wishlist
+- profile
+- notifications
+- saved preferences
+
+Use clear navigation.
+
+Avoid turning account pages into dashboard art projects.
+
+---
+
+# 24. REVIEWS & RATINGS
+
+Reviews should feel trustworthy.
+
+Include:
+
+- star rating
+- review count
+- distribution
+- customer review cards
+- verified purchase indicator when supported
+- images when supported
+- sorting/filtering
+
+Use progressive disclosure for large review sets.
+
+---
+
+# 25. WISHLIST
+
+Wishlist interactions should be delightful but subtle.
+
+When adding:
+
+- heart animation
+- confirmation
+- no page reload
+
+When removing:
+
+- smooth state transition
+
+Avoid excessive bouncing or cartoon-like effects.
+
+---
+
+# 26. ADMIN DESIGN
+
+Admin should use a different visual priority than the storefront.
+
+It should feel:
+
+- professional
+- dense
+- efficient
+- information-rich
+- fast
+
+Admin must prioritize productivity over visual experimentation.
+
+Core areas:
+
+- dashboard
+- orders
+- products
+- categories
+- inventory
+- customers
+- coupons
+- reviews
+- media
+- analytics
+- marketing
+- shipping
+- settings
+- users/roles
+- demo/mock data management
+
+The unified order center must clearly show:
+
+- All
+- TIGSBD
+- Sarongo
+- Mixed
+
+Store-specific admin permissions must remain clear.
+
+---
+
+# 27. ADMIN TABLES
+
+Tables should support:
+
+- sorting
+- filtering
+- search
+- pagination
+- bulk actions
+- column visibility where useful
+- responsive behavior
+
+Do not use excessive animation.
+
+Data should feel immediate.
+
+Loading should use skeletons or localized progress indicators.
+
+---
+
+# 28. MOBILE-FIRST RULES
+
+The mobile experience is not a smaller desktop site.
+
+Design explicitly for mobile.
+
+Must support:
+
+- thumb-friendly controls
+- bottom sheets
+- mobile search
+- slide-in navigation
+- touch-friendly product cards
+- sticky purchase controls where appropriate
+- sticky cart access where useful
+- responsive image galleries
+- compact checkout
+- readable typography
+- no horizontal overflow
+
+Avoid hover-only interactions.
+
+Avoid tiny controls.
+
+---
+
+# 29. RESPONSIVE BREAKPOINT PHILOSOPHY
+
+Design for:
+
+- small phones
+- large phones
+- tablets
+- laptops
+- large desktops
+
+Do not design only for one desktop width.
+
+Test:
+
+- narrow mobile
+- standard mobile
+- tablet portrait
+- tablet landscape
+- 1366px desktop
+- 1440px desktop
+- large desktop
+
+Large screens should not simply stretch content infinitely.
+
+Use max-width containers and controlled content density.
+
+---
+
+# 30. MOTION SYSTEM
+
+Motion must have a purpose.
+
+Use four categories.
+
+## A. Micro-interactions
+
+Fast:
+
+- button feedback
+- icon changes
+- wishlist
+- quantity
+- toggles
+- inputs
+- filter selection
+
+## B. Component transitions
+
+Medium:
+
+- dropdowns
+- modals
+- drawers
+- product gallery
+- mini-cart
+- filter panels
+
+## C. Page/section transitions
+
+Controlled:
+
+- section reveal
+- hero transition
+- route transition where beneficial
+
+## D. Storytelling motion
+
+Selective:
+
+- campaign hero
+- editorial sections
+- seasonal landing pages
+- brand moments
+
+Do not use storytelling motion everywhere.
+
+---
+
+# 31. MOTION TIMING
+
+Use a coherent timing system.
+
+Suggested ranges:
+
+- micro: 100–180ms
+- standard UI: 180–300ms
+- larger transitions: 300–500ms
+- cinematic transitions: 500–900ms only when justified
+
+Use smooth easing.
+
+Avoid sluggish animations.
+
+The user should never feel that the interface is waiting for the animation to finish.
+
+---
+
+# 32. SCROLL REVEALS
+
+Use scroll-triggered reveals for:
+
+- editorial sections
+- campaign blocks
+- category showcases
+- featured product groups
+- brand storytelling
+
+Possible effects:
+
+- fade + translate
+- subtle scale
+- masked image reveal
+- staggered content
+- image clipping/reveal
+
+Keep them restrained.
+
+Do not animate every product card independently on every scroll.
+
+Prefer grouped reveals.
+
+---
+
+# 33. PARALLAX
+
+Use subtle parallax only where it improves visual depth.
+
+Good candidates:
+
+- hero imagery
+- editorial photography
+- large campaign backgrounds
+
+Avoid:
+
+- heavy parallax on mobile
+- excessive motion
+- performance-heavy effects
+
+Respect reduced-motion preferences.
+
+---
+
+# 34. PAGE TRANSITIONS
+
+Page transitions may be used selectively.
+
+Good:
+
+- subtle fade
+- shared-element feeling
+- content crossfade
+
+Bad:
+
+- long black screens
+- spinning loaders between every page
+- forced cinematic intro
+- transition delays
+
+Navigation should feel instant.
+
+---
+
+# 35. LOADING STATES
+
+Loading is part of the design.
+
+Create polished skeleton states for:
+
+- product cards
+- product detail
+- search
+- category pages
+- cart
+- account
+- admin tables
+
+Skeletons should resemble final content geometry.
+
+Avoid giant centered spinners for ordinary loading.
+
+---
+
+# 36. EMPTY STATES
+
+Empty states should be useful.
+
+Examples:
+
+- empty cart
+- empty wishlist
+- no search results
+- no orders
+- no reviews
+- no notifications
+- empty category
+- no campaigns
+
+Each should include:
+
+- clear explanation
+- relevant illustration or visual treatment where useful
+- useful next action
+
+Do not overdesign empty states.
+
+---
+
+# 37. ERROR STATES
+
+Errors must feel calm and actionable.
+
+Show:
+
+- what happened
+- what the user can do
+- retry action
+- support path where appropriate
+
+Avoid technical jargon.
+
+Never hide critical checkout errors inside animations.
+
+---
+
+# 38. BUTTON SYSTEM
+
+Primary CTA:
+
+- strong contrast
+- unmistakable
+- consistent
+
+Secondary:
+
+- outlined or lower emphasis
+
+Tertiary:
+
+- text/icon action
+
+Destructive:
+
+- clearly differentiated
+
+Button states:
+
+- default
+- hover
+- active
+- focus
+- loading
+- disabled
+- success
+
+Loading buttons must preserve width to prevent layout jumping.
+
+---
+
+# 39. FORM SYSTEM
+
+Forms should feel premium but familiar.
+
+Inputs require:
+
+- clear labels
+- readable values
+- strong focus states
+- validation
+- error messages
+- success feedback where useful
+
+Never rely only on color for validation.
+
+---
+
+# 40. ACCESSIBILITY
+
+Accessibility is mandatory.
+
+Support:
+
+- keyboard navigation
+- visible focus
+- semantic HTML
+- proper labels
+- sufficient contrast
+- reduced motion
+- screen-reader-friendly controls
+- touch target sizes
+- accessible dialogs
+- accessible dropdowns
+- accessible carousels
+- accessible error messages
+
+Respect:
+
+`prefers-reduced-motion`
+
+When reduced motion is enabled:
+
+- remove parallax
+- reduce large transitions
+- remove unnecessary movement
+- retain essential state feedback
+
+---
+
+# 41. PERFORMANCE + MOTION
+
+Visual quality must not destroy performance.
+
+Prioritize:
+
+- optimized images
+- responsive images
+- lazy loading below the fold
+- limited JavaScript for decorative effects
+- GPU-friendly transforms
+- avoiding layout thrashing
+- avoiding huge video assets
+- code splitting
+- fast first contentful rendering
+
+Do not load a heavy animation library solely for one small effect.
+
+Prefer CSS/Web APIs or lightweight solutions where appropriate.
+
+---
+
+# 42. SEO + DESIGN
+
+Design must support SEO.
+
+Do not replace important text with images.
+
+Use real:
+
+- headings
+- product titles
+- descriptions
+- navigation
+- links
+- structured content
+
+Animations must not prevent content from being indexed or understood.
+
+---
+
+# 43. IMAGE + VIDEO RULES
+
+Hero imagery should be high quality but optimized.
+
+Use:
+
+- modern image formats
+- responsive sizing
+- correct aspect ratios
+- lazy loading
+- appropriate priority loading
+
+Video:
+
+- never autoplay with sound
+- provide poster images
+- respect reduced motion
+- do not block primary content
+- provide fallbacks
+
+---
+
+# 44. STORE PERSONALITY THROUGH MOTION
+
+TIGSBD motion:
+
+- confident
+- sharp
+- polished
+- energetic
+- precise
+
+Sarongo motion:
+
+- softer
+- expressive
+- lifestyle-oriented
+- fluid
+- elegant
+
+Both should share the same underlying motion framework.
+
+---
+
+# 45. SPECIAL INTERACTION: STORE SWITCHING
+
+This is a signature interaction.
+
+When moving between stores, the experience should feel intentional.
+
+Possible concept:
+
+- current store identity subtly exits
+- new store identity enters
+- content crossfades/recomposes
+- accent treatment changes
+- product content loads immediately
+
+The transition should be short.
+
+Do not block navigation.
+
+---
+
+# 46. SPECIAL INTERACTION: ADD TO CART
+
+Make the add-to-cart interaction memorable.
+
+Possible sequence:
+
+1. button acknowledges click
+2. product state confirms success
+3. cart quantity increments
+4. mini-cart or cart indicator responds
+5. optional product thumbnail movement toward cart
+
+Keep it fast.
+
+This is a micro-interaction, not a cinematic animation.
+
+---
+
+# 47. SPECIAL INTERACTION: PRODUCT IMAGE
+
+Product imagery can use:
+
+- smooth crossfade
+- zoom
+- secondary-image reveal
+- directional gallery movement
+- image masking
+
+Do not use random 3D effects unless they genuinely improve the product presentation.
+
+---
+
+# 48. SPECIAL INTERACTION: FILTERS
+
+Filtering should feel immediate.
+
+When selecting a filter:
+
+- selection state updates instantly
+- product content transitions smoothly
+- avoid flashing the entire page
+- preserve scroll position when appropriate
+
+Use localized skeleton loading when data is not immediate.
+
+---
+
+# 49. SPECIAL INTERACTION: CART DRAWER
+
+If using a cart drawer:
+
+- slide in smoothly
+- trap focus correctly
+- allow quantity edits
+- allow removal
+- show store grouping
+- show total
+- provide checkout CTA
+
+It should feel like a natural extension of the current page.
+
+---
+
+# 50. FOOTER
+
+Footer should be useful, not enormous.
+
+Include:
+
+- store links
+- categories
+- customer service
+- policies
+- account links
+- contact information
+- social links where appropriate
+- newsletter/marketing opt-in where appropriate
+
+Keep legal/policy links clear.
+
+---
+
+# 51. DESIGN CONSISTENCY RULE
+
+Create reusable components/tokens.
+
+Do not individually style every page.
+
+The system should have reusable primitives for:
+
+- Button
+- Input
+- Select
+- Modal
+- Drawer
+- Badge
+- Card
+- ProductCard
+- ProductGallery
+- Price
+- Rating
+- Search
+- StoreSwitcher
+- Navbar
+- Footer
+- Toast
+- Skeleton
+- EmptyState
+- ErrorState
+- Tabs
+- Accordion
+- Pagination
+- FilterPanel
+
+---
+
+# 52. DO NOT DO THESE THINGS
+
+Never produce:
+
+- generic Shopify-looking templates
+- generic Tailwind starter layouts
+- excessive glassmorphism
+- excessive gradients
+- random neon colors
+- giant meaningless text
+- animation on every element
+- hover-only mobile interactions
+- tiny mobile buttons
+- poor contrast
+- decorative loaders everywhere
+- excessive rounded pills
+- excessive drop shadows
+- cluttered dashboards
+- slow cinematic checkout
+- confusing store switching
+- copied Amazon UI
+- copied Awwwards website layouts
+- visual effects with no purpose
+
+---
+
+# 53. "PREMIUM" DOES NOT MEAN "COMPLICATED"
+
+The design should feel expensive because it is:
+
+- intentional
+- balanced
+- fast
+- precise
+- consistent
+- visually disciplined
+
+Not because it contains:
+
+- more gradients
+- more animations
+- more shadows
+- more effects
+
+---
+
+# 54. DESIGN PRIORITY ORDER
+
+When design decisions conflict, use this order:
+
+1. Accessibility
+2. Usability
+3. Conversion clarity
+4. Performance
+5. Information hierarchy
+6. Brand identity
+7. Visual sophistication
+8. Decorative experimentation
+
+Never reverse this order.
+
+---
+
+# 55. COPILOT IMPLEMENTATION RULE
+
+When implementing the design:
+
+Do NOT attempt to perfect the entire visual system in one pass.
+
+Build progressively.
+
+For each major implementation phase:
+
+1. implement the required functionality
+2. apply the relevant design-system layer
+3. run the local app
+4. inspect the page visually
+5. test desktop
+6. test mobile
+7. fix obvious visual/UX issues
+8. run tests/build checks
+9. report what changed
+10. stop for approval before moving to the next major phase
+
+---
+
+# 56. LOCAL VISUAL VERIFICATION
+
+Every major storefront phase must be visually checked locally.
+
+At minimum inspect:
+
+- homepage
+- navigation
+- store switcher
+- search
+- category page
+- product card
+- product detail
+- cart
+- checkout
+- order confirmation
+- account
+- admin
+
+Check at:
+
+- mobile
+- tablet
+- desktop
+
+Verify:
+
+- spacing
+- alignment
+- typography
+- contrast
+- overflow
+- animation
+- hover states
+- focus states
+- touch behavior
+- sticky elements
+- page transitions
+
+---
+
+# 57. DEFINITION OF VISUAL DONE
+
+A page is not visually complete merely because it compiles.
+
+A page is visually done when:
+
+- hierarchy is immediately understandable
+- brand identity is visible
+- spacing is intentional
+- components are consistent
+- mobile layout is deliberately designed
+- interactions have appropriate feedback
+- animations are purposeful
+- accessibility is respected
+- loading/empty/error states exist where needed
+- no visual overflow exists
+- performance remains acceptable
+- the page feels like one coherent product
+
+---
+
+# 58. FINAL CREATIVE TARGET
+
+The finished platform should feel like:
+
+> A serious, high-conversion marketplace with the usability discipline of a world-class e-commerce platform, presented through a distinctive premium visual system with award-level art direction and motion.
+
+A user should be able to shop effortlessly.
+
+A designer should notice the craft.
+
+A developer should see a coherent design system.
+
+A returning customer should recognize the brand immediately.
+
+And TIGSBD and Sarongo should feel like two distinct stores belonging to the same sophisticated platform.
+
+---
+
+# 59. NON-NEGOTIABLE FINAL RULE
+
+Do not make the website "fancy."
+
+Make it:
+
+**clear + fast + premium + memorable + useful + original.**
+
+The goal is not to prove that the site can animate.
+
+The goal is to make every interaction feel deliberately designed.
+
+---
+
+# 60. MOCK DATA / DEMO CONTENT VISUAL RULES
+
+The local development experience must NEVER feel empty.
+
+The platform should ship with a clearly identifiable, realistic **soft mock/demo dataset** for development and visual QA.
+
+Mock data should populate enough of the system to make every major screen feel real:
+
+- products
+- categories
+- product images/placeholders
+- prices
+- discounts
+- inventory
+- ratings/reviews
+- customers
+- addresses
+- orders
+- coupons
+- banners/campaigns
+- notifications
+- analytics examples
+- shipping methods
+- store content
+
+Mock data must be visually realistic but obviously synthetic.
+
+Do not use real customer information.
+
+## Admin control over mock data
+
+The admin must have a dedicated:
+
+**Demo / Mock Data Management**
+
+area.
+
+It must allow authorized admins to:
+
+- see what demo data exists
+- see the data type/count
+- identify demo records
+- seed/reseed demo data
+- delete demo data
+- delete selected demo datasets
+- clear all demo data
+- reset the demo environment where appropriate
+
+Mock/demo records must be safely identifiable in the database.
+
+For example, use a reliable provenance mechanism such as:
+
+- `isDemo`
+- `dataSource`
+- `seedBatchId`
+
+Do NOT identify mock records merely by product names.
+
+## Production safety
+
+The UI must make it difficult to accidentally delete real data.
+
+The "Delete all demo data" action must:
+
+- clearly state that only demo data will be deleted
+- show the number/type of records affected
+- require deliberate confirmation
+- never delete real customer/order/product records
+
+Real data must never be treated as mock data merely because it resembles seeded data.
+
+## Visual requirement
+
+The visual design must work in both states:
+
+1. **Demo-filled state**
+2. **Real-data state after demo cleanup**
+
+Do not hard-code layouts around a fixed number of demo products.
+
+Empty states must be designed intentionally so the real production site still looks polished when a category, wishlist, order list, campaign, etc. has no data.

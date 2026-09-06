@@ -1,4 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TIGSBD + Sarongo
+
+Clean-slate shared commerce platform foundation using Next.js App Router, TypeScript, React, Tailwind CSS, Turso/libSQL, Drizzle ORM, and Zod.
+
+## Local development
+
+```bash
+npm install
+Copy-Item .env.example .env.local
+npm run db:migrate
+npm run db:seed
+npm run dev
+```
+
+Open `http://localhost:3000`.
+
+## Checks
+
+```bash
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
+
+Phase 0 is intentionally limited to project bootstrap. See [PROGRESS.md](PROGRESS.md), [ARCHITECTURE.md](ARCHITECTURE.md), and [DATABASE.md](DATABASE.md) for the current foundation.
 
 ## Getting Started
 

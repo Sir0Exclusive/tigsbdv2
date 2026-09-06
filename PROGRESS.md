@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 0 - Project bootstrap
+Phase 1 - Store foundation
 
 ## Completed
 
@@ -12,16 +12,18 @@ Phase 0 - Project bootstrap
 - Server-only signed session token primitives.
 - Minimal base application shell and health endpoint.
 - Focused Phase 0 unit test setup.
+- Centralized TIGSBD and Sarongo store registry with slug/key resolution.
+- Shared `/tigsbd` and `/sarongo` storefront route and responsive shell.
+- Accessible desktop/mobile store switcher, navigation foundation, and footer.
+- Store-specific metadata, branding, and demo-identification schema fields.
+- Phase 1 database migration and idempotent store seed.
 
 ## Verification
 
-- `npm run lint` passed.
-- `npm run typecheck` passed.
-- `npm test` passed.
-- `npm run build` passed.
+- `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build` passed.
 - `npm run db:generate`, `npm run db:migrate`, and `npm run db:seed` passed against local libSQL.
-- Local dev server verified at `http://localhost:3000`.
-- Browser verified the home page and `/api/health` response.
+- `/tigsbd`, `/sarongo`, and invalid store routing verified locally.
+- Desktop and 390px responsive storefront layouts visually inspected.
 
 ## Known issues
 
@@ -29,4 +31,4 @@ None known.
 
 ## Next phase
 
-Wait for approval before starting Phase 1.
+Wait for approval before starting Phase 2.

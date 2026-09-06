@@ -42,7 +42,8 @@ export async function getSession() {
 }
 
 export async function getCurrentUser(): Promise<PublicUser | null> {
-	if (env.DATABASE_URL.startsWith("file:")) return null;
+	const databaseUrl = process.env.DATABASE_URL;
+	if (!databaseUrl || databaseUrl.startsWith("file:")) return null;
 	try {
 		const session = await getSession();
 		if (!session) return null;

@@ -8,13 +8,14 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/phase-0.test.ts",
+    "test": "tsx --test tests/phase-0.test.ts tests/auth.test.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx src/lib/db/seed.ts"
   },
   "dependencies": {
     "@libsql/client": "^0.18.0",
+    "bcryptjs": "^3.0.3",
     "drizzle-orm": "^0.45.2",
     "next": "16.3.4",
     "react": "19.2.8",

@@ -4,12 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { storeConfigs, type StoreConfig } from "@/lib/stores";
+import type { PublicUser } from "@/lib/auth/service";
 
 type MobileMenuProps = {
   activeStore: StoreConfig;
+  currentUser: PublicUser | null;
 };
 
-export function MobileMenu({ activeStore }: MobileMenuProps) {
+export function MobileMenu({ activeStore, currentUser }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -19,7 +21,7 @@ export function MobileMenu({ activeStore }: MobileMenuProps) {
         aria-expanded={isOpen}
         aria-controls="mobile-navigation"
         onClick={() => setIsOpen((open) => !open)}
-        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-4 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-4 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
       >
         <span aria-hidden="true" className="text-lg leading-none">{isOpen ? "×" : "☰"}</span>
         <span>Menu</span>
@@ -34,11 +36,14 @@ export function MobileMenu({ activeStore }: MobileMenuProps) {
                 href={`/${store.slug}`}
                 onClick={() => setIsOpen(false)}
                 aria-current={store.slug === activeStore.slug ? "page" : undefined}
-                className="rounded-xl px-3 py-3 text-base text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-300"
+                className="rounded-xl px-3 py-3 text-base text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-amber-300"
               >
                 {store.name}
               </Link>
             ))}
+            <Link href={currentUser ? "/account" : "/login?next=/account"} onClick={() => setIsOpen(false)} className="rounded-xl px-3 py-3 text-base text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-amber-300">
+              {currentUser ? "Account" : "Login"}
+            </Link>
             <div className="mt-3 border-t border-white/10 pt-3">
               <span className="px-3 text-sm text-slate-500">Browse, search, account and cart will arrive in later phases.</span>
             </div>

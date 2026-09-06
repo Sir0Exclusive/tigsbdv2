@@ -1,3 +1,3 @@
 # Environment
 
-Copy `.env.example` to `.env.local` for local development. Never commit `.env.local` or real credentials. Production must provide a random `AUTH_SESSION_SECRET` of at least 32 characters and the Turso database credentials.
+Copy `.env.example` to `.env.local` for local development. Never commit `.env.local` or real credentials. Production must provide a random `AUTH_SESSION_SECRET` of at least 32 characters and the Turso database credentials (`DATABASE_URL` and `DATABASE_AUTH_TOKEN`) before registration/login can operate. Public storefronts fail safe to logged-out state if those values are absent. Phase 2 does not require an email provider: email verification and password reset are future foundations, not fake production flows.

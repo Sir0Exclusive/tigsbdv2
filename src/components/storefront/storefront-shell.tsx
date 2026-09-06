@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { MobileMenu } from "@/components/storefront/mobile-menu";
 import { StoreSwitcher } from "@/components/storefront/store-switcher";
+import { getCurrentUser } from "@/lib/auth/session";
+import type { PublicUser } from "@/lib/auth/service";
 import { storeConfigs, type StoreConfig } from "@/lib/stores";
 
 type StorefrontShellProps = {
@@ -9,7 +11,8 @@ type StorefrontShellProps = {
   children: React.ReactNode;
 };
 
-export function StorefrontShell({ store, children }: StorefrontShellProps) {
+export async function StorefrontShell({ store, children }: StorefrontShellProps) {
+  const currentUser: PublicUser | null = await getCurrentUser();
   return (
     <div className="min-h-screen bg-[#f7f8f6] text-slate-950" style={{ "--store-accent": store.colors.accent } as React.CSSProperties}>
       <div className="bg-slate-950 px-6 py-2 text-center text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-amber-200">
@@ -25,10 +28,10 @@ export function StorefrontShell({ store, children }: StorefrontShellProps) {
             <StoreSwitcher activeStore={store} />
             <div className="h-7 w-px bg-white/10" />
             <button type="button" disabled className="cursor-not-allowed text-sm text-slate-500" aria-label="Search coming in a later phase">Search</button>
-            <button type="button" disabled className="cursor-not-allowed text-sm text-slate-500" aria-label="Account coming in a later phase">Account</button>
+            <Link href={currentUser ? "/account" : "/login?next=/account"} className="text-sm text-slate-200 transition-colors hover:text-amber-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300">{currentUser ? "Account" : "Login"}</Link>
             <button type="button" disabled className="cursor-not-allowed rounded-full border border-white/15 px-4 py-2 text-sm text-slate-400" aria-label="Cart coming in a later phase">Cart · 0</button>
           </div>
-          <MobileMenu activeStore={store} />
+          <MobileMenu activeStore={store} currentUser={currentUser} />
         </div>
       </header>
       {children}

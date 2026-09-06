@@ -35,3 +35,19 @@ a {
 		animation-iteration-count: 1 !important;
 	}
 }
+
+.auth-input {
+	min-height: 3rem;
+	border: 1px solid #cbd5e1;
+	border-radius: 0.75rem;
+	background: #fff;
+	padding: 0.75rem 0.875rem;
+	color: #101827;
+	outline: none;
+	transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.auth-input:focus {
+	border-color: #101827;
+	box-shadow: 0 0 0 3px rgb(231 168 62 / 30%);
+}

@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 1 - Store foundation
+Phase 2 - Authentication and shared customer identity
 
 ## Completed
 
@@ -17,6 +17,11 @@ Phase 1 - Store foundation
 - Accessible desktop/mobile store switcher, navigation foundation, and footer.
 - Store-specific metadata, branding, and demo-identification schema fields.
 - Phase 1 database migration and idempotent store seed.
+- Shared customer `users` and revocable `sessions` schema.
+- Bcrypt password hashing, normalized email identity, registration, login, and logout APIs.
+- Server-side current-user and protected account boundary.
+- Shared auth UI at `/login`, `/register`, and `/account`.
+- Store shell account state integration and in-memory abuse-rate-limit foundation.
 
 ## Verification
 
@@ -24,11 +29,12 @@ Phase 1 - Store foundation
 - `npm run db:generate`, `npm run db:migrate`, and `npm run db:seed` passed against local libSQL.
 - `/tigsbd`, `/sarongo`, and invalid store routing verified locally.
 - Desktop and 390px responsive storefront layouts visually inspected.
+- Registration, login state, cross-store persistence, logout, invalid credentials, and protected account access verified locally.
 
 ## Known issues
 
-None known.
+Email verification and password reset are intentionally deferred because no email provider is configured. Vercel currently has no database or auth environment variables, so production registration/login require those values to be configured before they can be verified.
 
 ## Next phase
 
-Wait for approval before starting Phase 2.
+Wait for approval before starting Phase 3.

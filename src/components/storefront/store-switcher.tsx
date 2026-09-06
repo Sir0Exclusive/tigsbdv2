@@ -16,7 +16,7 @@ export function StoreSwitcher({ activeStore }: StoreSwitcherProps) {
             key={store.key}
             href={`/${store.slug}`}
             aria-current={isActive ? "page" : undefined}
-            className={`rounded-full px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 ${
+            className={`rounded-full px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 ${
               isActive ? "bg-white text-slate-950" : "text-slate-300 hover:bg-white/10 hover:text-white"
             }`}
           >

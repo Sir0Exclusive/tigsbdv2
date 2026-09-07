@@ -5,6 +5,13 @@ import { categories, products } from "@/lib/db/schema";
 export async function GET() {
   const results: any = {};
   try {
+    const c = require("crypto");
+    const h = (s: string) => c.createHash("sha256").update(s).digest("hex").slice(0, 12);
+
+    results.databaseUrlLength = process.env.DATABASE_URL?.length || 0;
+    results.databaseUrlHash = process.env.DATABASE_URL ? h(process.env.DATABASE_URL) : null;
+    results.databaseUrlPrefix = process.env.DATABASE_URL?.substring(0, 30) || null;
+
     const { getDb } = await import("@/lib/db/client");
     const db = getDb();
 

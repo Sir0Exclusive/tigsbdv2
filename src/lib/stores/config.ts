@@ -2,8 +2,11 @@ export type StoreKey = "TIGSBD" | "SARONGO";
 
 export type StoreConfig = {
   key: StoreKey;
+  id: string;
   name: string;
   slug: string;
+  role: "main" | "sub";
+  isDefault: boolean;
   description: string;
   logo: string;
   colors: {
@@ -20,8 +23,11 @@ export type StoreConfig = {
 export const storeConfigs: readonly StoreConfig[] = [
   {
     key: "TIGSBD",
+    id: "store_tigsbd",
     name: "TIGSBD",
     slug: "tigsbd",
+    role: "main",
+    isDefault: true,
     description: "A considered collection for everyday living.",
     logo: "TIGSBD",
     colors: { accent: "#e7a83e", accentSoft: "#fff2d2", ink: "#101827" },
@@ -32,8 +38,11 @@ export const storeConfigs: readonly StoreConfig[] = [
   },
   {
     key: "SARONGO",
+    id: "store_sarongo",
     name: "Sarongo",
     slug: "sarongo",
+    role: "sub",
+    isDefault: false,
     description: "Distinctive finds with a warmer point of view.",
     logo: "SARONGO",
     colors: { accent: "#d97852", accentSoft: "#ffe4d9", ink: "#241817" },

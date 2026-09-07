@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { CatalogGrid } from "@/components/catalog/catalog-grid";
+import { listStoreProducts } from "@/lib/catalog";
 import { resolveStore, storeConfigs } from "@/lib/stores";
 
 type StorePageProps = {
@@ -11,6 +13,7 @@ export default async function StorePage({ params }: StorePageProps) {
   const store = resolveStore(slug);
   if (!store) return null;
   const sibling = storeConfigs.find((candidate) => candidate.slug !== store.slug);
+  const featuredProducts = await listStoreProducts(store);
 
   return (
     <main>
@@ -45,6 +48,13 @@ export default async function StorePage({ params }: StorePageProps) {
             <p className="mt-4 text-lg font-semibold text-slate-900">{item}</p>
           </div>
         ))}
+      </section>
+      <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-8 lg:pb-24">
+        <div className="flex items-end justify-between gap-4 border-b border-slate-200 pb-5">
+          <div><p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-700">The first edit</p><h2 className="mt-2 text-3xl font-black tracking-tight">Made for this store</h2></div>
+          <Link href={`/${store.slug}/products`} className="text-sm font-semibold text-slate-700 underline-offset-4 hover:underline">View all</Link>
+        </div>
+        <div className="mt-8"><CatalogGrid products={featuredProducts.slice(0, 4)} storeSlug={store.slug} /></div>
       </section>
     </main>
   );

@@ -16,6 +16,13 @@ const transitions: Record<OrderStatus, readonly OrderStatus[]> = {
   cancelled: [],
 };
 
+export function matchesOrderStoreFilter(storeIds: string[], filter: "all" | "tigsbd" | "sarongo" | "mixed") {
+  if (filter === "all") return true;
+  if (filter === "mixed") return storeIds.includes("store_tigsbd") && storeIds.includes("store_sarongo");
+  if (filter === "tigsbd") return storeIds.includes("store_tigsbd");
+  return storeIds.includes("store_sarongo");
+}
+
 export async function getCustomerOrders(userId: string) {
   const db = getDb();
   const rows = await db.select().from(orders).where(eq(orders.userId, userId)).orderBy(desc(orders.createdAt));
@@ -53,7 +60,7 @@ export async function getAdminOrders(userId: string, filter: "all" | "tigsbd" | 
     const visible = scope.role === "platform_admin" || scope.role === "order_manager" || items.some((item) => scope.storeIds.includes(item.storeId));
     if (!visible) continue;
     const isMixed = storeIds.length > 1;
-    const matches = filter === "all" || (filter === "mixed" && isMixed) || (filter === "tigsbd" && storeIds.length === 1 && storeIds[0] === "store_tigsbd") || (filter === "sarongo" && storeIds.length === 1 && storeIds[0] === "store_sarongo");
+    const matches = matchesOrderStoreFilter(storeIds, filter);
     if (matches) result.push({ order, items, storeIds, isMixed });
   }
   return result;

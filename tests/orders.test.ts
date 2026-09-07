@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { eq } from "drizzle-orm";
 
-import { cancelCustomerOrder, getAdminOrder, getAdminOrders, getCustomerOrder, updateOrderStatus } from "@/lib/orders";
+import { cancelCustomerOrder, getAdminOrder, getAdminOrders, getCustomerOrder, matchesOrderStoreFilter, updateOrderStatus } from "@/lib/orders";
 import { db } from "@/lib/db/client";
 import { adminStoreAssignments, adminUsers, orderItems, orderStatusHistory, orders, users } from "@/lib/db/schema";
 
@@ -40,4 +40,17 @@ test("customer ownership, admin filters, transitions, history, and cancellation 
   await db.delete(adminUsers).where(eq(adminUsers.userId, adminId));
   await db.delete(users).where(eq(users.id, customerId));
   await db.delete(users).where(eq(users.id, adminId));
+});
+
+test("admin store filters include mixed orders in both store views", () => {
+  assert.equal(matchesOrderStoreFilter(["store_tigsbd"], "all"), true);
+  assert.equal(matchesOrderStoreFilter(["store_tigsbd"], "tigsbd"), true);
+  assert.equal(matchesOrderStoreFilter(["store_tigsbd"], "sarongo"), false);
+  assert.equal(matchesOrderStoreFilter(["store_tigsbd"], "mixed"), false);
+  assert.equal(matchesOrderStoreFilter(["store_sarongo"], "sarongo"), true);
+  assert.equal(matchesOrderStoreFilter(["store_sarongo"], "tigsbd"), false);
+  assert.equal(matchesOrderStoreFilter(["store_sarongo"], "mixed"), false);
+  assert.equal(matchesOrderStoreFilter(["store_tigsbd", "store_sarongo"], "tigsbd"), true);
+  assert.equal(matchesOrderStoreFilter(["store_tigsbd", "store_sarongo"], "sarongo"), true);
+  assert.equal(matchesOrderStoreFilter(["store_tigsbd", "store_sarongo"], "mixed"), true);
 });

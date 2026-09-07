@@ -14,4 +14,4 @@ TIGSBD is the authoritative main/default store (`role: main`, `isDefault: true`)
 
 Cart ownership is platform-wide rather than store-specific. Guest identity is an opaque HttpOnly cart cookie; authenticated carts are associated with the shared user identity. Cart lines reference catalog products and preserve their store through that relationship; client prices and store IDs are never trusted.
 
-Checkout creates one order from the shared cart, with order-item store and product snapshots for historical integrity. Payment is represented by a pending placeholder adapter; no provider or sensitive payment data is used.
+Checkout creates one order from the shared cart, with order-item store and product snapshots for historical integrity. Platform money is integer poisha in canonical BDT, while historical order currency values remain unchanged. Payment is represented by a pending adapter with COD, bKash, Nagad, and card method identities; no provider or sensitive payment data is used.

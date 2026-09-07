@@ -8,6 +8,7 @@ import { carts, orderItems, orders, type Cart } from "@/lib/db/schema";
 import { storeConfigs } from "@/lib/stores";
 import { checkoutSchema } from "./validation";
 import { PlaceholderPaymentProvider } from "./payment";
+import { PLATFORM_CURRENCY } from "@/lib/money";
 
 const STANDARD_SHIPPING_CENTS = 0;
 
@@ -32,13 +33,13 @@ export async function createCheckoutOrder(rawInput: unknown, guestToken?: string
   const orderId = `order_${randomBytes(12).toString("hex")}`;
   const orderNumber = `TIG-${Date.now().toString(36).toUpperCase()}`;
   const address = { firstName: input.firstName, lastName: input.lastName, address1: input.address1, address2: input.address2 ?? "", city: input.city, region: input.region, postalCode: input.postalCode, country: input.country, phone: input.phone };
-  const payment = await new PlaceholderPaymentProvider().createIntent();
+  const payment = await new PlaceholderPaymentProvider().createIntent({ orderId, amountCents: totalCents, currency: PLATFORM_CURRENCY, method: input.paymentMethod });
 
   await db.transaction(async (tx) => {
     for (const line of lines) {
       if (line.inventory && line.quantity > line.inventory.availableQuantity - line.inventory.reservedQuantity) throw new Error(`Insufficient stock for ${line.product.name}.`);
     }
-    await tx.insert(orders).values({ id: orderId, orderNumber, userId: user?.id ?? null, guestEmail: input.email, guestPhone: input.phone, status: "pending", paymentStatus: payment.status, paymentMethod: payment.method, currency: "USD", subtotalCents, shippingCents: STANDARD_SHIPPING_CENTS, discountCents: 0, taxCents: 0, totalCents, shippingMethod: input.shippingMethod, shippingAddress: address, idempotencyKey: input.idempotencyKey, createdAt: now, updatedAt: now });
+    await tx.insert(orders).values({ id: orderId, orderNumber, userId: user?.id ?? null, guestEmail: input.email, guestPhone: input.phone, status: "pending", paymentStatus: payment.status, paymentMethod: payment.method, currency: PLATFORM_CURRENCY, subtotalCents, shippingCents: STANDARD_SHIPPING_CENTS, discountCents: 0, taxCents: 0, totalCents, shippingMethod: input.shippingMethod, shippingAddress: { ...address, division: input.division, district: input.district, upazila: input.upazila ?? "" }, idempotencyKey: input.idempotencyKey, createdAt: now, updatedAt: now });
     for (const line of lines) {
       const store = storeConfigs.find((candidate) => candidate.id === line.product.storeId);
       if (!store) throw new Error("Invalid store ownership.");

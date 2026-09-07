@@ -50,6 +50,13 @@
       "when": 1788778007152,
       "tag": "0006_perpetual_eddie_brock",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1788783169565,
+      "tag": "0007_demonic_scourge",
+      "breakpoints": true
     }
   ]
 }

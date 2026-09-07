@@ -12,4 +12,6 @@ Cart items retain product and optional variant relationships, while cart ownersh
 
 Orders preserve server-calculated totals, shipping/customer snapshots, idempotency keys, and item-level store/product snapshots. Order creation does not decrement inventory in this phase; it validates current availability and leaves reservation/deduction for the later order/inventory phase.
 
+New orders use `BDT`; existing historical orders are not converted or rewritten. All money remains integer minor units, where 100 poisha equals ৳1.
+
 Run `npm run db:seed` after configuring the database environment.

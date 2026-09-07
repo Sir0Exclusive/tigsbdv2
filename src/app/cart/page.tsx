@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 
 import { ProductVisual } from "@/components/catalog/product-visual";
 import { getStoreByKey, storeConfigs } from "@/lib/stores";
+import { formatBDT } from "@/lib/money";
 
 type Line = { cartId: string; product: { id: string; storeId: string; name: string; slug: string; sku: string; priceCents: number; salePriceCents: number | null }; variant: { id: string; name: string; priceCents: number | null } | null; media: { url: string } | null; inventory: { availableQuantity: number; reservedQuantity: number } | null; quantity: number; unitPriceCents: number; lineSubtotalCents: number };
 
-function price(cents: number) { return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(cents / 100); }
+function price(cents: number) { return formatBDT(cents); }
 
 export default function CartPage() {
   const [lines, setLines] = useState<Line[]>([]);

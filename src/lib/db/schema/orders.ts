@@ -13,7 +13,7 @@ export const orders = sqliteTable("orders", {
   status: text("status", { enum: ["pending", "confirmed", "cancelled"] }).notNull().default("pending"),
   paymentStatus: text("payment_status", { enum: ["pending", "paid", "failed"] }).notNull().default("pending"),
   paymentMethod: text("payment_method").notNull().default("placeholder"),
-  currency: text("currency").notNull().default("USD"),
+  currency: text("currency").notNull().default("BDT"),
   subtotalCents: integer("subtotal_cents").notNull(),
   shippingCents: integer("shipping_cents").notNull(),
   discountCents: integer("discount_cents").notNull().default(0),

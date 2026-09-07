@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 5 - Shared checkout foundation
+Phase 5.1 - Bangladesh commerce foundation
 
 ## Completed
 
@@ -37,6 +37,10 @@ Phase 5 - Shared checkout foundation
 - Guest checkout form with shipping/contact snapshot.
 - Pending placeholder payment abstraction and idempotent order creation.
 - Shared `/checkout` route and order confirmation state.
+- Canonical BDT/poisha currency and ৳ formatting across catalog, cart, checkout, and new orders.
+- Bangladesh mobile validation and division/district/upazila-ready checkout address fields.
+- COD selection with bKash, Nagad, and card provider abstractions.
+- Synthetic demo catalog prices updated to realistic BDT values.
 
 ## Verification
 
@@ -48,10 +52,11 @@ Phase 5 - Shared checkout foundation
 - Catalog isolation tests and local visual verification for both stores, categories, PDPs, wrong-store PDP rejection, and 390px layout.
 - Guest, authenticated-service, merge, mixed-store, quantity, and cart browser flow verification.
 - Mixed-store checkout browser verification with one order, combined total, confirmation, and cart clearing.
+- BDT formatting, phone validation, COD, and new-order currency tests.
 
 ## Known issues
 
-Email verification and password reset remain deferred because no email provider is configured. Real payment, inventory deduction, coupons, shipping integrations, and admin order management remain deferred.
+Email verification and password reset remain deferred because no email provider is configured. Real payment providers, inventory deduction, coupons, shipping integrations, and admin order management remain deferred.
 
 ## Next phase
 

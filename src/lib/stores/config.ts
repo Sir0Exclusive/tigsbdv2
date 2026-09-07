@@ -28,7 +28,7 @@ export const storeConfigs: readonly StoreConfig[] = [
     slug: "tigsbd",
     role: "main",
     isDefault: true,
-    description: "A considered collection for everyday living.",
+    description: "A general marketplace for considered everyday goods.",
     logo: "TIGSBD",
     colors: { accent: "#e7a83e", accentSoft: "#fff2d2", ink: "#101827" },
     metadata: {
@@ -43,7 +43,7 @@ export const storeConfigs: readonly StoreConfig[] = [
     slug: "sarongo",
     role: "sub",
     isDefault: false,
-    description: "Distinctive finds with a warmer point of view.",
+    description: "Women and children, warmly considered.",
     logo: "SARONGO",
     colors: { accent: "#d97852", accentSoft: "#ffe4d9", ink: "#241817" },
     metadata: {

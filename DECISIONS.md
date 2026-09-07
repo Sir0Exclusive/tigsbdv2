@@ -38,3 +38,11 @@
 - Use a pending placeholder payment adapter; no payment provider or sensitive payment data is stored.
 - Clear the cart only after the order and all order items are created successfully.
 - Defer inventory decrement/reservation, coupons, shipping integrations, refunds, and admin order management.
+
+## Phase 5.1
+
+- Use BDT as the sole platform currency, represented as integer poisha. Historical order currency values are preserved.
+- Accept Bangladesh mobile formats beginning `01[3-9]` with 11 local digits or the `+880`/`880` equivalent.
+- Collect division, district, and optional upazila/thana readiness without shipping a geographic database.
+- Enable COD as the only active payment method; bKash, Nagad, and card remain provider method abstractions.
+- Update only synthetic demo catalog prices through the existing idempotent seed; no real product/order records are deleted or converted.

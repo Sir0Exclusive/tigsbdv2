@@ -12,7 +12,7 @@ type StorefrontShellProps = {
 
 export async function StorefrontShell({ store, children }: StorefrontShellProps) {
   let currentUser: PublicUser | null = null;
-  if (process.env.DATABASE_URL && !process.env.DATABASE_URL.startsWith("file:") && process.env.VERCEL !== "1") {
+  if (process.env.DATABASE_URL && !process.env.DATABASE_URL.startsWith("file:")) {
     const { getCurrentUser } = await import("@/lib/auth/session");
     currentUser = await getCurrentUser();
   }

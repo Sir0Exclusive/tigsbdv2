@@ -1,10 +1,12 @@
 import { z } from "zod";
 
+const emptyAsUndefined = (value: unknown) => value === "" ? undefined : value;
+
 const envSchema = z.object({
-  DATABASE_URL: z.string().min(1).default("file:./local.db"),
-  DATABASE_AUTH_TOKEN: z.string().optional(),
-  AUTH_SESSION_SECRET: z.string().min(32).default("local-development-session-secret-change-me"),
-  NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
+  DATABASE_URL: z.preprocess(emptyAsUndefined, z.string().min(1).default("file:./local.db")),
+  DATABASE_AUTH_TOKEN: z.preprocess(emptyAsUndefined, z.string().optional()),
+  AUTH_SESSION_SECRET: z.preprocess(emptyAsUndefined, z.string().min(32).default("local-development-session-secret-change-me")),
+  NEXT_PUBLIC_APP_URL: z.preprocess(emptyAsUndefined, z.string().url().default("http://localhost:3000")),
 });
 
 export const env = envSchema.parse({

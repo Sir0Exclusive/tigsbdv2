@@ -57,6 +57,13 @@
       "when": 1788783169565,
       "tag": "0007_demonic_scourge",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1788785202837,
+      "tag": "0008_good_tyger_tiger",
+      "breakpoints": true
     }
   ]
 }

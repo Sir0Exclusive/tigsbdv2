@@ -9,6 +9,7 @@ import { storeConfigs } from "@/lib/stores";
 import { checkoutSchema } from "./validation";
 import { PlaceholderPaymentProvider } from "./payment";
 import { PLATFORM_CURRENCY } from "@/lib/money";
+import { orderStatusHistory } from "@/lib/db/schema";
 
 const STANDARD_SHIPPING_CENTS = 0;
 
@@ -40,6 +41,7 @@ export async function createCheckoutOrder(rawInput: unknown, guestToken?: string
       if (line.inventory && line.quantity > line.inventory.availableQuantity - line.inventory.reservedQuantity) throw new Error(`Insufficient stock for ${line.product.name}.`);
     }
     await tx.insert(orders).values({ id: orderId, orderNumber, userId: user?.id ?? null, guestEmail: input.email, guestPhone: input.phone, status: "pending", paymentStatus: payment.status, paymentMethod: payment.method, currency: PLATFORM_CURRENCY, subtotalCents, shippingCents: STANDARD_SHIPPING_CENTS, discountCents: 0, taxCents: 0, totalCents, shippingMethod: input.shippingMethod, shippingAddress: { ...address, division: input.division, district: input.district, upazila: input.upazila ?? "" }, idempotencyKey: input.idempotencyKey, createdAt: now, updatedAt: now });
+    await tx.insert(orderStatusHistory).values({ id: `history_${randomBytes(12).toString("hex")}`, orderId, previousStatus: null, newStatus: "pending", actorType: "system", actorUserId: user?.id ?? null, note: "Order created", createdAt: now });
     for (const line of lines) {
       const store = storeConfigs.find((candidate) => candidate.id === line.product.storeId);
       if (!store) throw new Error("Invalid store ownership.");

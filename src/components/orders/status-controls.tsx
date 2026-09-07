@@ -1,0 +1,6 @@
+"use client";
+
+import { useState } from "react";
+
+type Props = { orderId: string; current: string };
+export function StatusControls({ orderId, current }: Props) { const [status,setStatus]=useState(current); const [message,setMessage]=useState(""); async function update(next:string){const response=await fetch(`/api/admin/orders/${orderId}/status`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({status:next})});if(response.ok){setStatus(next);setMessage("Status updated.")}else{const body=await response.json();setMessage(body.error??"Unable to update status.")}} const next={pending:["confirmed","cancelled"],confirmed:["processing","cancelled"],processing:["shipped","cancelled"],shipped:["delivered"],delivered:[],cancelled:[]}[status]??[];return <div className="rounded-2xl border border-slate-200 bg-white p-5"><p className="font-bold">Status control</p><p className="mt-2 text-sm text-slate-500">Current: {status}</p><div className="mt-4 flex flex-wrap gap-2">{next.map(option=><button key={option} type="button" onClick={()=>void update(option)} className="rounded-xl bg-slate-950 px-3 py-2 text-xs font-bold uppercase tracking-[0.1em] text-white">Set {option}</button>)}</div>{message?<p className="mt-3 text-sm text-slate-600">{message}</p>:null}</div>; }

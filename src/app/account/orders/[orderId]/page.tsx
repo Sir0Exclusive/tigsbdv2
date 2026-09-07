@@ -1,0 +1,17 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+import { requireUser } from "@/lib/auth/session";
+import { getCustomerOrder } from "@/lib/orders";
+import { formatBDT } from "@/lib/money";
+
+type Props = { params: Promise<{ orderId: string }> };
+
+export default async function CustomerOrderDetailPage({ params }: Props) {
+  const user = await requireUser();
+  const { orderId } = await params;
+  const data = await getCustomerOrder(user.id, orderId);
+  if (!data) notFound();
+  const { order, items, history } = data;
+  return <main className="mx-auto max-w-5xl px-6 py-12 lg:px-8 lg:py-16"><Link href="/account/orders" className="text-sm font-semibold text-slate-600 hover:underline">Back to orders</Link><div className="mt-8 flex flex-col justify-between gap-5 border-b border-slate-200 pb-8 sm:flex-row sm:items-end"><div><p className="text-sm font-bold uppercase tracking-[0.18em] text-amber-700">Order detail</p><h1 className="mt-3 text-4xl font-black tracking-tight">{order.orderNumber}</h1><p className="mt-2 text-sm text-slate-500">{new Date(order.createdAt).toLocaleString("en-BD")}</p></div><span className="rounded-full bg-slate-950 px-4 py-2 text-sm font-bold uppercase tracking-[0.12em] text-white">{order.status}</span></div><div className="mt-8 grid gap-8 lg:grid-cols-[1fr_18rem]"><section className="space-y-4">{items.map(item=><article key={item.id} className="rounded-2xl border border-slate-200 bg-white p-5"><div className="flex justify-between gap-4"><div><p className="text-xs font-bold uppercase tracking-[0.14em] text-amber-700">{item.storeName}</p><h2 className="mt-2 text-lg font-bold">{item.productName}</h2><p className="mt-1 text-sm text-slate-500">SKU {item.productSku} · Qty {item.quantity}</p></div><p className="font-bold">{formatBDT(item.lineTotalCents)}</p></div></article>)}</section><aside className="space-y-5"><div className="rounded-2xl bg-slate-950 p-6 text-white"><p className="text-sm font-bold uppercase tracking-[0.14em] text-amber-200">Summary</p><div className="mt-5 space-y-3 text-sm"><div className="flex justify-between"><span>Subtotal</span><strong>{formatBDT(order.subtotalCents)}</strong></div><div className="flex justify-between"><span>Shipping</span><strong>{formatBDT(order.shippingCents)}</strong></div><div className="flex justify-between border-t border-white/15 pt-4 text-lg"><span>Total</span><strong>{formatBDT(order.totalCents)}</strong></div></div><p className="mt-4 text-xs text-slate-400">{order.paymentMethod.toUpperCase()} · {order.paymentStatus}</p></div><div className="rounded-2xl border border-slate-200 bg-white p-5"><p className="font-bold">Delivery</p><p className="mt-2 text-sm leading-6 text-slate-600">{order.shippingAddress.address1}, {order.shippingAddress.city}, {order.shippingAddress.district}, {order.shippingAddress.division}, {order.shippingAddress.country}</p><p className="mt-3 text-sm text-slate-500">{order.shippingMethod} · {order.shippingStatus}</p></div><div className="rounded-2xl border border-slate-200 bg-white p-5"><p className="font-bold">Status timeline</p><div className="mt-4 space-y-3">{history.map(event=><div key={event.id} className="border-l-2 border-amber-400 pl-3 text-sm"><p className="font-semibold">{event.newStatus}</p><p className="text-slate-500">{new Date(event.createdAt).toLocaleString("en-BD")}</p></div>)}</div></div></aside></div></main>;
+}

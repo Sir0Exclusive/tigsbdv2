@@ -24,6 +24,7 @@ export default async function AccountPage() {
             <div className="rounded-2xl border border-slate-200 p-5"><p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Name</p><p className="mt-2 font-semibold">{user.firstName} {user.lastName}</p></div>
             <div className="rounded-2xl border border-slate-200 p-5"><p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Email</p><p className="mt-2 break-all font-semibold">{user.email}</p></div>
           </div>
+          <Link href="/account/orders" className="mt-6 block rounded-2xl border border-slate-200 p-5 transition-colors hover:border-slate-950"><p className="font-semibold">Order history</p><p className="mt-1 text-sm text-slate-500">View your TIGSBD and Sarongo orders.</p></Link>
           <p className="mt-8 rounded-2xl bg-slate-950 p-5 text-sm leading-6 text-slate-300">Orders, addresses, wishlist, and other customer features will be added in later phases. Your shared identity is ready for both stores now.</p>
         </div>
       </div>

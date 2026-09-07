@@ -1,6 +1,6 @@
 import { and, desc, eq, inArray } from "drizzle-orm";
 
-import { db } from "@/lib/db/client";
+import { getDb } from "@/lib/db/client";
 import { categories, productCategories, productInventory, productMedia, products, productVariants } from "@/lib/db/schema";
 import { getStoreBySlug, type StoreConfig } from "@/lib/stores";
 
@@ -16,10 +16,12 @@ export async function resolveCatalogStore(slug: string): Promise<StoreConfig | n
 }
 
 export async function listStoreCategories(store: StoreConfig) {
+  const db = getDb();
   return db.select().from(categories).where(and(eq(categories.storeId, store.id), eq(categories.status, "active"))).orderBy(categories.name);
 }
 
 export async function listStoreProducts(store: StoreConfig, categorySlug?: string): Promise<CatalogProduct[]> {
+  const db = getDb();
   let productIds: string[] | undefined;
   if (categorySlug) {
     const [category] = await db.select({ id: categories.id }).from(categories).where(and(eq(categories.storeId, store.id), eq(categories.slug, categorySlug), eq(categories.status, "active"))).limit(1);
@@ -36,6 +38,7 @@ export async function listStoreProducts(store: StoreConfig, categorySlug?: strin
 }
 
 export async function getStoreProduct(store: StoreConfig, slug: string): Promise<CatalogProduct | null> {
+  const db = getDb();
   const [product] = await db.select().from(products).where(and(eq(products.storeId, store.id), eq(products.slug, slug), eq(products.status, "active"), eq(products.visibility, "visible"))).limit(1);
   if (!product) return null;
   const [hydrated] = await hydrateProducts([product], store.id);
@@ -43,6 +46,7 @@ export async function getStoreProduct(store: StoreConfig, slug: string): Promise
 }
 
 async function hydrateProducts(productRows: typeof products.$inferSelect[], storeId: string): Promise<CatalogProduct[]> {
+  const db = getDb();
   const ids = productRows.map((product) => product.id);
   if (ids.length === 0) return [];
   const [mediaRows, inventoryRows, variantRows] = await Promise.all([

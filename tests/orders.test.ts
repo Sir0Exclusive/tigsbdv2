@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { eq } from "drizzle-orm";
 
-import { cancelCustomerOrder, getAdminOrder, getAdminOrders, getCustomerOrder, matchesOrderStoreFilter, updateOrderStatus } from "@/lib/orders";
+import { cancelCustomerOrder, getAdminOrder, getAdminOrders, getAdminScope, getCustomerOrder, matchesOrderStoreFilter, updateOrderStatus } from "@/lib/orders";
 import { db } from "@/lib/db/client";
 import { adminStoreAssignments, adminUsers, orderItems, orderStatusHistory, orders, users } from "@/lib/db/schema";
 
@@ -53,4 +53,21 @@ test("admin store filters include mixed orders in both store views", () => {
   assert.equal(matchesOrderStoreFilter(["store_tigsbd", "store_sarongo"], "tigsbd"), true);
   assert.equal(matchesOrderStoreFilter(["store_tigsbd", "store_sarongo"], "sarongo"), true);
   assert.equal(matchesOrderStoreFilter(["store_tigsbd", "store_sarongo"], "mixed"), true);
+});
+
+test("admin scope exposes only active assignments for store managers", async () => {
+  const now = new Date();
+  const userId = `user_scope_${crypto.randomUUID()}`;
+  await db.insert(users).values({ id: userId, email: `${userId}@example.test`, passwordHash: "test", firstName: "Store", lastName: "Manager", createdAt: now, updatedAt: now });
+  await db.insert(adminUsers).values({ userId, role: "store_manager", createdAt: now });
+  await db.insert(adminStoreAssignments).values({ userId, storeId: "store_sarongo", createdAt: now });
+
+  const scope = await getAdminScope(userId);
+  assert.equal(scope?.role, "store_manager");
+  assert.deepEqual(scope?.storeIds, ["store_sarongo"]);
+  assert.equal(await getAdminScope(`missing_${crypto.randomUUID()}`), null);
+
+  await db.delete(adminStoreAssignments).where(eq(adminStoreAssignments.userId, userId));
+  await db.delete(adminUsers).where(eq(adminUsers.userId, userId));
+  await db.delete(users).where(eq(users.id, userId));
 });

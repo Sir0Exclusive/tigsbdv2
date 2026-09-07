@@ -40,7 +40,7 @@ export async function getCustomerOrder(userId: string, orderId: string) {
   return { order, items, history };
 }
 
-async function getAdminScope(userId: string) {
+export async function getAdminScope(userId: string) {
   const db = getDb();
   const [admin] = await db.select().from(adminUsers).where(and(eq(adminUsers.userId, userId), eq(adminUsers.isActive, true))).limit(1);
   if (!admin) return null;

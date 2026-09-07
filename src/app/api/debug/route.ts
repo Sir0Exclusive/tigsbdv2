@@ -1,36 +1,39 @@
 import { NextResponse } from "next/server";
 import { sql, eq, and } from "drizzle-orm";
-import { categories, products, carts, cartItems } from "@/lib/db/schema";
+import { categories, products } from "@/lib/db/schema";
 
 export async function GET() {
+  const results: any = {};
   try {
     const { getDb } = await import("@/lib/db/client");
     const db = getDb();
 
-    const tables = await db.all(sql.raw("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"));
+    results.step1 = "importing db";
     const allProducts = await db.select().from(products);
-    const activeVisibleProducts = await db.select().from(products).where(and(eq(products.status, "active"), eq(products.visibility, "visible")));
-    const tigsbdProducts = await db.select().from(products).where(eq(products.storeId, "store_tigsbd"));
-    const tigsbdActiveVisibleProducts = await db.select().from(products).where(and(eq(products.storeId, "store_tigsbd"), eq(products.status, "active"), eq(products.visibility, "visible")));
-    const allCats = await db.select().from(categories);
-    const cartsData = await db.select().from(carts);
-    const cartItemsData = await db.select().from(cartItems);
+    results.step2 = "loaded products";
+    results.allProductsCount = allProducts.length;
 
-    return NextResponse.json({
-      tablesCount: tables.length,
-      tableNames: tables.map((t: any) => t.name),
-      allProductsCount: allProducts.length,
-      statusSamples: allProducts.slice(0, 2).map(p => ({ id: p.id, status: p.status, visibility: p.visibility, storeId: p.storeId })),
-      activeVisibleProductsCount: activeVisibleProducts.length,
-      tigsbdOnlyCount: tigsbdProducts.length,
-      tigsbdActiveVisibleCount: tigsbdActiveVisibleProducts.length,
-      categoriesCount: allCats.length,
-      cartsCount: cartsData.length,
-      cartItemsCount: cartItemsData.length,
-    });
+    const activeVisibleProducts = await db.select().from(products).where(and(eq(products.status, "active"), eq(products.visibility, "visible")));
+    results.step3 = "queried active/visible";
+    results.activeVisibleProductsCount = activeVisibleProducts.length;
+
+    const tigsbdProducts = await db.select().from(products).where(eq(products.storeId, "store_tigsbd"));
+    results.step4 = "queried tigsbd";
+    results.tigsbdOnlyCount = tigsbdProducts.length;
+
+    const tigsbdActiveVisibleProducts = await db.select().from(products).where(and(eq(products.storeId, "store_tigsbd"), eq(products.status, "active"), eq(products.visibility, "visible")));
+    results.step5 = "queried tigsbd active/visible";
+    results.tigsbdActiveVisibleCount = tigsbdActiveVisibleProducts.length;
+
+    const allCats = await db.select().from(categories);
+    results.step6 = "queried categories";
+    results.categoriesCount = allCats.length;
+
+    results.finalStep = "success";
+    return NextResponse.json(results);
   } catch (error) {
-    return NextResponse.json({
-      error: error instanceof Error ? error.message : "Unknown error",
-    }, { status: 500 });
+    results.error = error instanceof Error ? error.message : "Unknown error";
+    results.stack = error instanceof Error ? error.stack?.split("\n").slice(0, 2) : undefined;
+    return NextResponse.json(results, { status: 500 });
   }
 }

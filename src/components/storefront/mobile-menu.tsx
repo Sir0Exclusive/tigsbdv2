@@ -44,6 +44,7 @@ export function MobileMenu({ activeStore, currentUser }: MobileMenuProps) {
             <Link href={currentUser ? "/account" : "/login?next=/account"} onClick={() => setIsOpen(false)} className="rounded-xl px-3 py-3 text-base text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-amber-300">
               {currentUser ? "Account" : "Login"}
             </Link>
+            <Link href="/cart" onClick={() => setIsOpen(false)} className="rounded-xl px-3 py-3 text-base text-slate-200 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-amber-300">Shared cart</Link>
             <div className="mt-3 border-t border-white/10 pt-3">
               <span className="px-3 text-sm text-slate-500">Browse, search, account and cart will arrive in later phases.</span>
             </div>

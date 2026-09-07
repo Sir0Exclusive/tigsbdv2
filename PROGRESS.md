@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 3 - Catalog foundation
+Phase 4 - Shared cart
 
 ## Completed
 
@@ -27,6 +27,11 @@ Phase 3 - Catalog foundation
 - Server-side catalog query layer with store-first isolation.
 - Customer-facing store catalog listings, category pages, PDPs, pricing, variants, stock states, and breadcrumbs.
 - Synthetic independent demo catalogs for both stores.
+- Shared guest/authenticated cart schema and server-side service.
+- Opaque guest cart cookie and authenticated cart ownership.
+- Guest-to-account cart merge on registration/login.
+- Mixed-store cart UI with quantities, removal, subtotal, stock/price validation, and empty state.
+- PDP add-to-cart action and shared `/cart` route.
 
 ## Verification
 
@@ -36,11 +41,12 @@ Phase 3 - Catalog foundation
 - Desktop and 390px responsive storefront layouts visually inspected.
 - Registration, login state, cross-store persistence, logout, invalid credentials, and protected account access verified locally.
 - Catalog isolation tests and local visual verification for both stores, categories, PDPs, wrong-store PDP rejection, and 390px layout.
+- Guest, authenticated-service, merge, mixed-store, quantity, and cart browser flow verification.
 
 ## Known issues
 
-Email verification and password reset remain deferred because no email provider is configured. Cart, checkout, orders, and admin remain deferred to later phases.
+Email verification and password reset remain deferred because no email provider is configured. Checkout, orders, payments, and admin remain deferred to later phases.
 
 ## Next phase
 
-Wait for approval before starting Phase 4.
+Wait for approval before starting Phase 5.

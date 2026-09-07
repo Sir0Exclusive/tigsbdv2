@@ -22,3 +22,10 @@
 - Use repository-safe placeholder media references and CSS-rendered product visuals. Do not add paid object storage.
 - Keep catalog writes out of scope; Phase 3 provides safe server-side reads and synthetic demo seed data for both stores.
 - Defer cart actions to Phase 4; product controls are intentionally non-mutating placeholders.
+
+## Phase 4
+
+- Use one platform-wide cart table, never store-specific carts.
+- Keep guest identifiers opaque and hashed in the database; do not encode cart contents or prices in cookies.
+- Merge guest lines into the authenticated cart at login/registration, combining matching product/variant lines and retaining distinct lines.
+- Keep checkout disabled; the cart UI explicitly communicates that checkout belongs to a later phase.

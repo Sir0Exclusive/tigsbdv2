@@ -1,3 +1,4 @@
 export * from "./stores";
 export * from "./users";
 export * from "./catalog";
+export * from "./cart";

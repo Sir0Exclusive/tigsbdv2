@@ -32,7 +32,7 @@ export async function StorefrontShell({ store, children }: StorefrontShellProps)
             <div className="h-7 w-px bg-white/10" />
             <button type="button" disabled className="cursor-not-allowed text-sm text-slate-500" aria-label="Search coming in a later phase">Search</button>
             <Link href={currentUser ? "/account" : "/login?next=/account"} className="text-sm text-slate-200 transition-colors hover:text-amber-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300">{currentUser ? "Account" : "Login"}</Link>
-            <button type="button" disabled className="cursor-not-allowed rounded-full border border-white/15 px-4 py-2 text-sm text-slate-400" aria-label="Cart coming in a later phase">Cart · 0</button>
+            <Link href="/cart" className="rounded-full border border-white/15 px-4 py-2 text-sm text-slate-200 transition-colors hover:border-amber-200 hover:text-amber-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300">Cart</Link>
           </div>
           <MobileMenu activeStore={store} currentUser={currentUser} />
         </div>

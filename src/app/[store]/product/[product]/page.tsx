@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ProductVisual } from "@/components/catalog/product-visual";
+import { AddToCartButton } from "@/components/cart/add-to-cart-button";
 import { getStoreProduct, resolveCatalogStore } from "@/lib/catalog";
 
 type ProductPageProps = { params: Promise<{ store: string; product: string }> };
@@ -30,8 +31,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <p className="mt-6 text-lg leading-8 text-slate-600">{item.product.description}</p>
           <div className="mt-8 flex flex-wrap gap-2 text-sm"><span className="rounded-full bg-slate-100 px-4 py-2 font-semibold text-slate-700">SKU {item.product.sku}</span><span className={`rounded-full px-4 py-2 font-semibold ${stock > 0 ? "bg-emerald-50 text-emerald-800" : "bg-slate-100 text-slate-500"}`}>{stock > 0 ? `${stock} available` : "Currently unavailable"}</span></div>
           {item.variants.length ? <div className="mt-8"><h2 className="text-sm font-bold uppercase tracking-[0.16em] text-slate-500">Options</h2><div className="mt-3 flex flex-wrap gap-2">{item.variants.map((variant) => <span key={variant.id} className="rounded-xl border border-slate-300 px-4 py-3 text-sm font-semibold">{variant.name}</span>)}</div></div> : null}
-          <button type="button" disabled className="mt-10 w-full cursor-not-allowed rounded-xl bg-slate-950 px-5 py-4 text-sm font-bold text-white opacity-70 sm:w-auto sm:min-w-56" aria-label="Add to cart arrives in Phase 4">Cart arrives in Phase 4</button>
-          <p className="mt-4 text-sm leading-6 text-slate-500">Catalog foundation only. Cart and checkout are intentionally deferred to Phase 4.</p>
+          <AddToCartButton productId={item.product.id} variantId={item.variants.length === 1 ? item.variants[0].id : null} disabled={stock === 0} />
+          <p className="mt-4 text-sm leading-6 text-slate-500">One shared cart across TIGSBD and Sarongo. Checkout is intentionally deferred.</p>
         </section>
       </div>
     </main>

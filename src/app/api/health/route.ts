@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 
-import { env } from "@/lib/env";
-
 export function GET() {
+  const runtimeDatabaseUrl = process.env["DATABASE_URL"];
   return NextResponse.json({
     status: "ok",
-    databaseConfigured: Boolean(env.DATABASE_URL),
+    databaseConfigured: Boolean(runtimeDatabaseUrl),
+    databaseSource: runtimeDatabaseUrl?.startsWith("file:") ? "local" : runtimeDatabaseUrl ? "remote" : "absent",
     environment: process.env.NODE_ENV,
   });
 }

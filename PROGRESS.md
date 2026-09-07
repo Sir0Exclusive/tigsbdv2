@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 4 - Shared cart
+Phase 5 - Shared checkout foundation
 
 ## Completed
 
@@ -32,6 +32,11 @@ Phase 4 - Shared cart
 - Guest-to-account cart merge on registration/login.
 - Mixed-store cart UI with quantities, removal, subtotal, stock/price validation, and empty state.
 - PDP add-to-cart action and shared `/cart` route.
+- Shared `orders` and `order_items` schema with store/product snapshots.
+- Server-side checkout validation and total calculation.
+- Guest checkout form with shipping/contact snapshot.
+- Pending placeholder payment abstraction and idempotent order creation.
+- Shared `/checkout` route and order confirmation state.
 
 ## Verification
 
@@ -42,11 +47,12 @@ Phase 4 - Shared cart
 - Registration, login state, cross-store persistence, logout, invalid credentials, and protected account access verified locally.
 - Catalog isolation tests and local visual verification for both stores, categories, PDPs, wrong-store PDP rejection, and 390px layout.
 - Guest, authenticated-service, merge, mixed-store, quantity, and cart browser flow verification.
+- Mixed-store checkout browser verification with one order, combined total, confirmation, and cart clearing.
 
 ## Known issues
 
-Email verification and password reset remain deferred because no email provider is configured. Checkout, orders, payments, and admin remain deferred to later phases.
+Email verification and password reset remain deferred because no email provider is configured. Real payment, inventory deduction, coupons, shipping integrations, and admin order management remain deferred.
 
 ## Next phase
 
-Wait for approval before starting Phase 5.
+Wait for approval before starting Phase 6.

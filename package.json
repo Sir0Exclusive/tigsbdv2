@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test --test-concurrency=1 tests/phase-0.test.ts tests/auth.test.ts tests/catalog.test.ts tests/cart.test.ts",
+    "test": "tsx --test --test-concurrency=1 tests/phase-0.test.ts tests/auth.test.ts tests/catalog.test.ts tests/cart.test.ts tests/checkout.test.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx src/lib/db/seed.ts"

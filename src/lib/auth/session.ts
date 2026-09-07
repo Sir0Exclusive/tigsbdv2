@@ -1,5 +1,3 @@
-import "server-only";
-
 import { createHmac, randomBytes } from "node:crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";

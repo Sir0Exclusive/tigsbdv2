@@ -43,6 +43,13 @@
       "when": 1788773189909,
       "tag": "0005_tearful_onslaught",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1788778007152,
+      "tag": "0006_perpetual_eddie_brock",
+      "breakpoints": true
     }
   ]
 }

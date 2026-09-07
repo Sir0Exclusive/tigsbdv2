@@ -49,11 +49,11 @@ export async function PATCH(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const input = z.object({ productId: z.string().min(1), variantId: z.string().min(1).nullable().optional(), clear: z.boolean().optional() }).parse(await request.json());
+    const input = z.object({ productId: z.string().min(1).optional(), variantId: z.string().min(1).nullable().optional(), clear: z.boolean().optional() }).refine((value) => value.clear || value.productId, { message: "Product is required unless clearing the cart." }).parse(await request.json());
     const { user, token } = await identity();
     const cart = await getOrCreateCart({ userId: user?.id, guestToken: token });
     if (input.clear) await clearCart(cart.cart.id);
-    else await removeCartItem(cart.cart.id, input.productId, input.variantId ?? null);
+    else await removeCartItem(cart.cart.id, input.productId!, input.variantId ?? null);
     return responseWithCart(cart);
   } catch { return NextResponse.json({ error: "Unable to remove item." }, { status: 400 }); }
 }

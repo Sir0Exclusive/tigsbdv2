@@ -29,3 +29,12 @@
 - Keep guest identifiers opaque and hashed in the database; do not encode cart contents or prices in cookies.
 - Merge guest lines into the authenticated cart at login/registration, combining matching product/variant lines and retaining distinct lines.
 - Keep checkout disabled; the cart UI explicitly communicates that checkout belongs to a later phase.
+
+## Phase 5
+
+- Create one order containing all shared-cart lines, including mixed TIGSBD and Sarongo items.
+- Re-read product, variant, and inventory data server-side; client totals are never accepted.
+- Use an idempotency key to prevent duplicate order creation on retries.
+- Use a pending placeholder payment adapter; no payment provider or sensitive payment data is stored.
+- Clear the cart only after the order and all order items are created successfully.
+- Defer inventory decrement/reservation, coupons, shipping integrations, refunds, and admin order management.
